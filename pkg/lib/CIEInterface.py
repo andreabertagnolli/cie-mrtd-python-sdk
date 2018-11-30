@@ -374,7 +374,8 @@ class CIEInterface:
 
         bar = None
         if progressBar:
-            bar = progressbar.ProgressBar(max_value=maxLen)
+            bar = progressbar.ProgressBar(maxLen)
+            bar.start()
 
         dataLen = len(data)
         while dataLen < maxLen:
