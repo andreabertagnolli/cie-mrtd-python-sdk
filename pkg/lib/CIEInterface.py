@@ -38,8 +38,7 @@ class CIEInterface:
         try:
             self.cardservice = cardrequest.waitforcard()
         except CardRequestTimeoutException:
-            print('Card not found, exiting')
-            sys.exit(1)
+            raise Exception('Card not found')
 
         # Connect to the card if found
         self.cardservice.connection.connect()
@@ -162,14 +161,14 @@ class CIEInterface:
         respMutaAuth = nfc_response_to_array(respMutaAuth)
 
         if sw != '9000':
-            raise Exception('CIEInterface.mrtdAuth: could not complete the authentication process')
+            raise Exception('Could not complete the authentication process')
 
         kIsMac = macEnc(bacMac, getIsoPad(respMutaAuth[:32]))
         kIsMac2 = respMutaAuth[-8:]
 
         # Make sure the calculated and received MAC are the same
         if kIsMac != kIsMac2:
-            raise Exception('CIEInterface.mrtdAuth: could not complete the authentication process')
+            raise Exception('Could not complete the authentication process')
 
         decResp = desDec(bacEnc, respMutaAuth[:32])
         kMrtd = decResp[-16:]
