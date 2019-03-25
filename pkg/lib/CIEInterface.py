@@ -34,7 +34,7 @@ class CIEInterface:
         self.index = 0
 
         # Wait for the card
-        print('Waiting for the CIE...')
+        #print('Waiting for the CIE...')
         try:
             self.cardservice = cardrequest.waitforcard()
         except CardRequestTimeoutException:
@@ -43,7 +43,7 @@ class CIEInterface:
 
         # Connect to the card if found
         self.cardservice.connection.connect()
-        print('Connected!')
+        # print('Connected!')
 
     def selectIAS(self):
         """
