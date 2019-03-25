@@ -22,7 +22,5 @@ def main():
         output = {"message": error.message}
         print(json.dumps(output))
 
-
-
 if __name__ == "__main__":
     main()
